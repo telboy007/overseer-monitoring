@@ -1,0 +1,174 @@
+h1 {
+  font-family: 'Raleway',sans-serif;
+  font-size: 62px; font-weight: 800;
+  line-height: 72px;
+  margin: 0 0 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'Raleway',sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 36px;
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+p {
+  color: #909090;
+  font-family: 'Raleway',sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 32px;
+  margin: 0 0 24px;
+}
+
+a {
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: #c8c8c8;
+  text-decoration: none;
+}
+
+.button {
+  background: #4B99AD;
+  padding: 8px 15px 8px 15px;
+  border: none;
+  color: #fff;
+}
+
+.button:hover {
+  background: #4691A4;
+  box-shadow:none;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+}
+
+.okay {
+  background-color: #44CC11;
+}
+
+.bad {
+  background-color: #DC5F59;
+}
+
+.unknown {
+  background-color: #6BAFBD;
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.box {
+  padding: 10px;
+	width:100px;
+}
+
+.box p {
+   margin: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%) }
+}
+
+.slabs {
+  padding: 10px;
+  background: #919191;
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: 20px;
+}
+
+.slabs-inline {
+  padding: 10px;
+  background: #b5b5b5;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-rows: auto;
+  grid-gap: 10px;
+}
+
+.slab {
+  background: #f8f8f8;
+  text-decoration: none;
+  color: #444;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.slab article {
+  padding: 20px;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* typography */
+.slab h1 {
+  font-size: 12px;
+  margin: 0;
+  color: #333;
+}
+
+.slab p {
+  flex: 1; /* make p grow to fill available space*/
+  line-height: 1.4;
+}
+
+span {
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin: 2em 0 0 0;
+}
+
+.label {
+  text-align: left;
+	width: 100%;
+	padding: 10px 20px;
+	background: #919191;
+	font-weight: bold;
+	font-size: 18px;
+	color: white;
+  line-height: 60px;
+  text-transform: uppercase;
+}
+
+@media (min-width: 600px) {
+	.label {
+		width: auto;
+	}
+}
+
+@media only screen and (min-width: 500px) {
+  .slabs {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 850px) {
+  .slabs {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}

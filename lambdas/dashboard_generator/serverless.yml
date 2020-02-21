@@ -1,0 +1,71 @@
+# serverless.yml
+
+service: dashboardGenerator
+
+provider:
+  name: aws
+  runtime: python2.7
+  stage: envname
+  region: eu-west-1
+  stackName: cf-overseer-dashboard-generator-${self:provider.stage} # Overwrite default CloudFormation stack name. Default is ${self:service}-${self:provider.stage}
+  profile: envname
+  memorySize: 128
+  timeout: 10
+  deploymentBucket:
+    name: overseer.serverless.${self:provider.region}.deploys # Overwrite the default deployment bucket
+    serverSideEncryption: AES256 # when using server-side encryption
+  deploymentPrefix: serverless # Overwrite the default S3 prefix under which deployed artifacts should be stored. Default is serverless
+  versionFunctions: false # Optional function versioning
+  stackTags: # Optional CF stack tags
+    app: overseer
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'ssm:GetParameter'
+      Resource:
+        Fn::Join:
+          - ':'
+          - - 'arn:aws:ssm'
+            - Ref: 'AWS::Region'
+            - Ref: 'AWS::AccountId'
+            - 'parameter/overseer-slack-hook-secret'
+    - Effect: 'Allow'
+      Action:
+        - 's3:PutObject'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - 'overseer-monitoring-bucket'
+            - "/*"
+    - Effect: 'Allow'
+      Action:
+        - 's3:GetObject'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - 'overseer-monitoring-bucket'
+            - "/*"
+    - Effect: 'Allow'
+      Action:
+        - 's3:ListBucket'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - 'overseer-monitoring-bucket'
+
+functions:
+  dashboardGeneratorLambda: # A Function
+    handler: lambda_generateDashboard.lambda_handler
+    name: overseer-dashboard-generator-${self:provider.stage} # optional, Deployed Lambda name
+    description: Generate Dashboards based on Check Lambda Output
+    runtime: python2.7 # optional overwrite, default is provider runtime
+    events:
+      - schedule: cron(5/10 * * * ? *)
+
+package:
+  include:
+    - ../../minions/python/**
+    - ../../templates/**
