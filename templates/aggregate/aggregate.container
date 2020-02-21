@@ -1,0 +1,12 @@
+<a href='overseer/%s/'>
+<div class='grid-cell grid-25'>
+  <div class='square square-100 %s'>
+    <div class='title'>
+      <h2>%s</h2>
+    </div>
+    <p class='timestring'>
+      %s
+    </p>
+  </div>
+</div>
+</a>

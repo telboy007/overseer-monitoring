@@ -1,0 +1,84 @@
+# serverless.yml
+
+service: certificatesOverseer
+
+provider:
+  name: aws
+  runtime: python2.7
+  stage: envname
+  region: eu-west-1
+  stackName: cf-overseer-certificates-${self:provider.stage} # Overwrite default CloudFormation stack name. Default is ${self:service}-${self:provider.stage}
+  profile: envname
+  memorySize: 256
+  timeout: 300
+  deploymentBucket:
+    name: overseer.serverless.${self:provider.region}.deploys # Overwrite the default deployment bucket
+    serverSideEncryption: AES256 # when using server-side encryption
+  deploymentPrefix: serverless # Overwrite the default S3 prefix under which deployed artifacts should be stored. Default is serverless
+  versionFunctions: false # Optional function versioning
+  stackTags: # Optional CF stack tags
+    app: overseer
+  iamManagedPolicies:
+    - Fn::Join:
+        - ':'
+        - - 'arn:aws:iam:'
+          - Ref: 'AWS::AccountId'
+          - 'policy/some_policy_name'
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 's3:PutObject'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - 'overseer-monitoring-bucket'
+            - "/*"
+    - Effect: 'Allow'
+      Action:
+        - 's3:GetObject'
+      Resource:
+        Fn::Join:
+          - ''
+          - - 'arn:aws:s3:::'
+            - 'overseer-monitoring-bucket'
+            - "/*"
+    - Effect: 'Allow'
+      Action:
+        - 'acm:ListCertificates'
+      Resource:
+        - "*"
+    - Effect: 'Allow'
+      Action:
+        - 'acm:DescribeCertificate'
+      Resource:
+        - "*"
+    - Effect: 'Allow'
+      Action:
+        - 'sts:AssumeRole'
+      Resource:
+      - Fn::Join:
+          - ':'
+          - - 'arn:aws:iam:'
+            - Ref: 'AWS::AccountId'
+            - 'role/some_admin_role'
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+functions:
+  bookingSyncLambda: # A Function
+    handler: lambda_certificates.lambda_handler
+    name: overseer-certificates-${self:provider.stage} # optional, Deployed Lambda name
+    description: Checks Certificates Expiry Dates
+    runtime: python2.7 # optional overwrite, default is provider runtime
+
+package:
+  include:
+    - ../../minions/python/**
+  exclude:
+    - venv/**

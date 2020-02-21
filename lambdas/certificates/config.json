@@ -1,0 +1,7 @@
+{
+  "check_name": "certificates",
+  "check_description": "expiry date check",
+  "dashboard_style": "default",
+  "slab_style": "status",
+  "frequency": "1_day"
+}
