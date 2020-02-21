@@ -18,7 +18,7 @@ class UTC(tzinfo):
 
 def get_lastrun_timestamp(overseer_file):
     client = boto3.client('s3')
-    obj = client.get_object(Bucket='hostmaker-overseer-staging', Key=overseer_file)
+    obj = client.get_object(Bucket='overseer-monitoring-bucket', Key=overseer_file)
     check_json = json.loads(obj['Body'].read())
     check_time = datetime.strptime(check_json['last_updated'], "%d-%b-%Y %H:%M:%S")
     return check_time

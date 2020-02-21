@@ -61,7 +61,7 @@ def s3_upload_dashboard(body, check_name):
     client = boto3.client('s3')
     client.put_object(
         Body=body,
-        Bucket='hostmaker-overseer-staging',
+        Bucket='overseer-monitoring-bucket',
         Key='dashboards/' + check_name + '.html',
         ContentType='text/html'
     )
