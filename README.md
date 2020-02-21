@@ -3,7 +3,7 @@
 Deployment
 ==========
 
-Deploys to aws lambda (via cloudformation) using Serverless.
+Deploys to aws lambda (via cloudformation) using Serverless, also as a bonus feature the deployment of the certificates lambda uses docker to compile required python libraries to ensure compatibility.  This was "fun" to implement.
 
 Gotchas: Minions (helper libraries) are packaged with the lamdba deployment so will be at root level on AWS unlike when run locally, keep that in mind. :)
 
@@ -100,8 +100,9 @@ Helper scripts:
 
 TODOs:
 
-1. Use proper logging
-2. More slab types - like charts, etc.
-2. Create example check lambdas in multiple languages
-3. Create helper script to add secrets to AWS
-5. Get the UI looking a bit more like dashing?
+1. Parameterise the overseer s3 bucket and environment name
+2. Use proper logging
+3. More slab types - like charts, etc.
+4. Create example check lambdas in multiple languages
+5. Create helper script to add secrets to AWS
+6. Get the UI looking a bit more like dashing?
