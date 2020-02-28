@@ -89,7 +89,7 @@ Add the new lambda to the `deploy-serverless.sh` file so it can deploy to the de
 
 Finally add the new lambda function to the `serverless.yml` for `master_controller` to enable the invoke permission.
 
-`
+```
 - Effect: 'Allow'
   Action:
     - 'lambda:InvokeFunction'
@@ -100,7 +100,7 @@ Finally add the new lambda function to the `serverless.yml` for `master_controll
         - Ref: 'AWS::Region'
         - Ref: 'AWS::AccountId'
         - 'function:overseer-checkname-envname'
-`
+```
 
 Viewing the dashboards
 ======================
