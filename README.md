@@ -81,7 +81,7 @@ In the master controller lambda add the name of the new lambda function in the f
 
 `
 lambda_list = [
-    'overseer-certificates-envname',
+    'overseer-checkname-envname',
 ]
 `
 
