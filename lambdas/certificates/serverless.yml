@@ -71,7 +71,7 @@ custom:
     dockerizePip: true
 
 functions:
-  bookingSyncLambda: # A Function
+  certificatesLambda: # A Function
     handler: lambda_certificates.lambda_handler
     name: overseer-certificates-${self:provider.stage} # optional, Deployed Lambda name
     description: Checks Certificates Expiry Dates
