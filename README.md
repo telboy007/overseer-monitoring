@@ -87,6 +87,21 @@ lambda_list = [
 
 Add the new lambda to the `deploy-serverless.sh` file so it can deploy to the designated `AWS account` (credentials must be configured on your local machine).
 
+Finally add the new lambda function to the `serverless.yml` for `master_controller` to enable the invoke permission.
+
+`
+- Effect: 'Allow'
+  Action:
+    - 'lambda:InvokeFunction'
+  Resource:
+    Fn::Join:
+      - ':'
+      - - 'arn:aws:lambda'
+        - Ref: 'AWS::Region'
+        - Ref: 'AWS::AccountId'
+        - 'function:overseer-checkname-envname'
+`
+
 Viewing the dashboards
 ======================
 
