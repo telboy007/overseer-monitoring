@@ -1,9 +1,34 @@
 # overseer
 
+Requirements
+============
+
+Installation requirements:
+* serverless
+* aws client
+* docker (desktop client)
+
+Configuration requirements:
+* aws credentials for your account setup
+
+Code changes:
+* change the deployment and application bucket name
+  * `overseer.serverless.${self:provider.region}.deploys`
+  * `overseer-monitoring-bucket`
+* change the region from `eu-west-2` (if required)
+* change `stage` and `profile` parameters in the `serverless.yaml` files to something relevant
+
 Deployment
 ==========
 
 Deploys to aws lambda (via cloudformation) using Serverless, also as a bonus feature the deployment of the certificates lambda uses docker to compile required python libraries to ensure compatibility.  This was "fun" to implement.
+
+Use the deployment script `overseer-serverless.sh` to deploy or remove overseer from your AWS account.
+
+Run the following:
+* `chmod +x overseer-serverless.sh`
+* `./overseer-serverless.sh <command> <aws_profile>`
+  * e.g. `./overseer-serverless.sh deploy my-account`
 
 Gotchas: Minions (helper libraries) are packaged with the lamdba deployment so will be at root level on AWS unlike when run locally, keep that in mind. :)
 

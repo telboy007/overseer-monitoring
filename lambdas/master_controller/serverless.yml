@@ -55,3 +55,8 @@ package:
 
 plugins:
   - serverless-deployment-bucket
+
+resources:
+  Resources:
+    overseer-monitoring-bucket:
+      Type: AWS::S3::Bucket
