@@ -9,7 +9,7 @@ Installation requirements:
 * docker (desktop client)
 
 Configuration requirements:
-* aws credentials for your account setup
+* AWS credentials for your account already setup
 
 Code changes:
 * change the deployment and application bucket name
@@ -27,6 +27,8 @@ Use the deployment script `overseer-serverless.sh` to deploy or remove overseer 
 
 Run the following:
 * `chmod +x overseer-serverless.sh`
+* `chmod +x setup.sh`
+* `./setup.sh`
 * `./overseer-serverless.sh <command> <aws_profile>`
   * e.g. `./overseer-serverless.sh deploy my-account`
 
