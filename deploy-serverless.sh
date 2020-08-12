@@ -32,8 +32,8 @@ fi
 
 # add / update the folder locations below
 cd lambdas/master_controller
-serverless deploy --aws-profile profile-name
+serverless deploy --aws-profile $1
 cd ../certificates
-serverless deploy --aws-profile profile-name
+serverless deploy --aws-profile $1
 cd ../dashboard_generator
-serverless deploy --aws-profile profile-name
+serverless deploy --aws-profile $1

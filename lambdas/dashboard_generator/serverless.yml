@@ -5,10 +5,10 @@ service: dashboardGenerator
 provider:
   name: aws
   runtime: python2.7
-  stage: envname
-  region: eu-west-1
+  stage: staging
+  region: eu-west-2
   stackName: cf-overseer-dashboard-generator-${self:provider.stage} # Overwrite default CloudFormation stack name. Default is ${self:service}-${self:provider.stage}
-  profile: envname
+  profile: staging
   memorySize: 128
   timeout: 10
   deploymentBucket:
@@ -69,3 +69,6 @@ package:
   include:
     - ../../minions/python/**
     - ../../templates/**
+
+plugins:
+  - serverless-deployment-bucket

@@ -1,0 +1,9 @@
+{
+  "name": "masterLambdaOverseer",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-deployment-bucket": "^1.1.2"
+  }
+}

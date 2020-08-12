@@ -5,10 +5,10 @@ service: certificatesOverseer
 provider:
   name: aws
   runtime: python2.7
-  stage: envname
-  region: eu-west-1
+  stage: staging
+  region: eu-west-2
+  profile: staging
   stackName: cf-overseer-certificates-${self:provider.stage} # Overwrite default CloudFormation stack name. Default is ${self:service}-${self:provider.stage}
-  profile: envname
   memorySize: 256
   timeout: 300
   deploymentBucket:
@@ -18,12 +18,12 @@ provider:
   versionFunctions: false # Optional function versioning
   stackTags: # Optional CF stack tags
     app: overseer
-  iamManagedPolicies:
-    - Fn::Join:
-        - ':'
-        - - 'arn:aws:iam:'
-          - Ref: 'AWS::AccountId'
-          - 'policy/some_policy_name'
+  # iamManagedPolicies:
+  #   - Fn::Join:
+  #       - ':'
+  #       - - 'arn:aws:iam:'
+  #         - Ref: 'AWS::AccountId'
+  #         - 'policy/AWSCertificateManagerReadOnly'
   iamRoleStatements:
     - Effect: 'Allow'
       Action:
@@ -53,19 +53,19 @@ provider:
         - 'acm:DescribeCertificate'
       Resource:
         - "*"
-    - Effect: 'Allow'
-      Action:
-        - 'sts:AssumeRole'
-      Resource:
-      - Fn::Join:
-          - ':'
-          - - 'arn:aws:iam:'
-            - Ref: 'AWS::AccountId'
-            - 'role/some_admin_role'
+    # - Effect: 'Allow'
+    #   Action:
+    #     - 'sts:AssumeRole'
+    #   Resource:
+    #   - Fn::Join:
+    #       - ':'
+    #       - - 'arn:aws:iam:'
+    #         - Ref: 'AWS::AccountId'
+    #         - 'role/some_admin_role'
 
 plugins:
   - serverless-python-requirements
-
+  - serverless-deployment-bucket
 custom:
   pythonRequirements:
     dockerizePip: true

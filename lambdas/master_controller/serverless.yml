@@ -5,10 +5,10 @@ service: masterLambdaOverseer
 provider:
   name: aws
   runtime: python2.7
-  stage: envname
-  region: eu-west-1
+  stage: staging
+  region: eu-west-2
   stackName: cf-overseer-${self:provider.stage} # Overwrite default CloudFormation stack name. Default is ${self:service}-${self:provider.stage}
-  profile: envname
+  profile: staging
   memorySize: 128
   timeout: 10
   deploymentBucket:
@@ -38,7 +38,7 @@ provider:
             - - 'arn:aws:lambda'
               - Ref: 'AWS::Region'
               - Ref: 'AWS::AccountId'
-              - 'function:overseer-certificates-envname'
+              - 'function:overseer-certificates-staging'
 
 functions:
   masterLambda: # A Function
@@ -52,3 +52,6 @@ functions:
 package:
   include:
     - ../../minions/python/**
+
+plugins:
+  - serverless-deployment-bucket

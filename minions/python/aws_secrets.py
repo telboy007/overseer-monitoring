@@ -5,7 +5,7 @@ import boto3
 
 #aws utilities
 def get_secret(secret):
-    ssm_client = boto3.client('ssm', region_name='eu-west-1')
+    ssm_client = boto3.client('ssm', region_name='eu-west-2')
     try:
         response = ssm_client.get_parameter(
             Name=secret,
@@ -18,7 +18,7 @@ def get_secret(secret):
 
 
 def get_secret_age(secret):
-    ssm_client = boto3.client('ssm', region_name='eu-west-1')
+    ssm_client = boto3.client('ssm', region_name='eu-west-2')
     try:
         response = ssm_client.get_parameter_history(
             Name=secret,
@@ -31,7 +31,7 @@ def get_secret_age(secret):
 
 
 def update_secret(secret, secret_value):
-    ssm_client = boto3.client('ssm', region_name='eu-west-1')
+    ssm_client = boto3.client('ssm', region_name='eu-west-2')
     try:
         response = ssm_client.put_parameter(
             Name=secret,

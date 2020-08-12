@@ -12,11 +12,10 @@ from python import slack_notifier
 
 
 def lambda_handler(event, context):
-    SLACK_HOOK_SECRET = aws_secrets.get_secret('overseer-slack-hook-secret')
 
     # Add new lambdas here
     lambda_list = [
-        'overseer-certificates-envname',
+        'overseer-certificates-staging',
     ]
 
     # Put lambdas for checks here

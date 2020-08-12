@@ -18,9 +18,13 @@ class UTC(tzinfo):
 
 def get_lastrun_timestamp(overseer_file):
     client = boto3.client('s3')
-    obj = client.get_object(Bucket='overseer-monitoring-bucket', Key=overseer_file)
-    check_json = json.loads(obj['Body'].read())
-    check_time = datetime.strptime(check_json['last_updated'], "%d-%b-%Y %H:%M:%S")
+    try:
+        obj = client.get_object(Bucket='overseer-monitoring-bucket', Key=overseer_file)
+        check_json = json.loads(obj['Body'].read())
+        check_time = datetime.strptime(check_json['last_updated'], "%d-%b-%Y %H:%M:%S")
+    except Exception:
+        check_time = "first run"
+
     return check_time
 
 
@@ -28,6 +32,8 @@ def check_timestamp(check_time, frequency, aware):
     """
         checks timestamp and tells lambda whether it should run or not
     """
+    if check_time == "first run":
+        return True
     utc = UTC()
     if aware:
         delta = datetime.now(utc) - check_time

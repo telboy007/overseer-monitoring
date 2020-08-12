@@ -31,7 +31,7 @@ Check lambdas
 * File can contain one or multiple key pairs.
 
 Example check json file:
-`{"last_updated": "20-Feb-2020 18:30:49", "config": {"slab": "status", "dashboard": "default"}, "results": {"aws cert 1 (eu-west-1)": "okay", "aws cert 2 (us-east-1)": "okay"}}`
+`{"last_updated": "20-Feb-2020 18:30:49", "config": {"slab": "status", "dashboard": "default"}, "results": {"aws cert 1 (eu-west-2)": "okay", "aws cert 2 (us-east-1)": "okay"}}`
 
 Minions provide certain functions to help out:
 * aws_secrets:

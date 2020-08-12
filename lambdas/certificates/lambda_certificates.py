@@ -52,7 +52,7 @@ def lambda_handler(event, context):
         # unique information for check
         checked_cert_list = {}
         cert_arn_dict = {}
-        regions = ["us-east-1", "eu-west-1"]
+        regions = ["eu-west-2"]
 
         # get list of things to check
         cert_arn_dict = list_certificates(regions)
