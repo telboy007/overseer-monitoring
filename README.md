@@ -5,7 +5,7 @@ Requirements
 
 Installation requirements:
 * serverless
-* aws client
+* aws cli
 * docker (desktop client)
 
 Configuration requirements:
