@@ -142,6 +142,7 @@ dmypy.json
 # Ignore build directory
 .serverless
 # Ignore plugin files
+**/package.json
 **/package-lock.json
 **/node_modules
 
